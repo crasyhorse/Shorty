@@ -1,0 +1,21 @@
+{
+    "name": "sysz25/shorty",
+    "description": "A small mapping tool for abbreviations and their meanings!",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "John Doe",
+            "email": "JohnDoe@anonymous.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Shorty\\": "app/shorty"
+        }
+    },
+    "require": {
+        "php": ">=7.4",
+        "bcosca/fatfree-core": "^3.7"
+    }
+}

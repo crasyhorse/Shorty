@@ -1,0 +1,22 @@
+{
+    "name": "shorty",
+    "version": "1.0.0",
+    "description": "A small mapping tool for abbreviations and their meanings!",
+    "main": "resources/js/app.js",
+    "author": {
+        "name": "John Doe",
+        "email": "johndoe@anonymous.org"
+    },
+    "license": "MIT",
+    "keywords": [],
+    "engines": {
+        "npm": "~6.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/crasyhorse/Shorty.git"
+    },
+    "dependencies": {
+        "vue": "^2.6.12"
+    }
+}
