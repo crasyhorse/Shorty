@@ -1,27 +1,15 @@
-# Shorty - 02 Create a minimum example
+# 03 Create the AbbreviationController class
 
-Im dieser Lektion soll ein Minimalbeispiel erstellt werden, welches den Text "Hallo Welt" im Browser ausgibt. Hierfür ist folgendes notwendig:
+In diesem Schritt soll eine REST-Api (https://de.wikipedia.org/wiki/Representational_State_Transfer) nach den Standards von Fat Free Framework implementiert werden. Hierfür wird eine Controller-Klasse erstellt, die für die Annahme sämtlicher Requests zuständig ist.
 
-* Anlegen des Verzeichnisses `resources/views/pages`
-* Anlegen der Datei `resources/views/pages/index.html` mit folgendem Inhalt:
-
-`index.html`
-```html
-<!DOCTYPE html>
-<html>
-<head></head>
-<body>
-  <h1>Hallo Welt</h1>
-</body>
-</html>
-```
-
-* Anlegen der Datei `./index.php`. Diese soll folgendes Leisten:
-  * Anlegen der GET-Route `/` mit einem Closure (Funktion). Das Closure soll die Datei `resources/views/pages/index.html` als Template rendern und ausgeben.
-  * Siehe hierzu:
-    * https://fatfreeframework.com/3.7/getting-started#Hello,World:TheLess-Than-A-MinuteFat-FreeRecipe
-    * https://fatfreeframework.com/3.7/routing-engine
-    * https://fatfreeframework.com/3.7/views-and-templates
+* Anlegen des Controller-Klasse `AbbreviationController`
+  * Dateipfad: `app/shorty/Http/Controllers`
+  * Dateiname: `AbbreviationController.php`
+  * Der Controller ist mit dem korrekten Namespace zu versehen
+* Einrichten eines Route-mappings (Resource-Method-Representation)
+  * https://www.peej.co.uk/articles/rmr-architecture.html
+  * Das Mapping muss den `AbbreviationController` verwenden
+  * Route: `/`
 
 `index.php`
 ```php
@@ -30,11 +18,13 @@ Im dieser Lektion soll ein Minimalbeispiel erstellt werden, welches den Text "Ha
 require_once('vendor/autoload.php');
 
 $f3 = Base::instance();
+$f3->set('AUTOLOAD', 'app/');
 
-$f3->route('GET /', function () {
-    echo Template::instance()->render('resources/views/pages/index.html');
-});
+$f3->map('/', 'Shorty\Http\Controllers\AbbreviationController');
 
 $f3->run();
 ```
-Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/03_create_the_abbreviation_controller_class
+* Erstellen der Methode `get()` im `AbbreviationController`
+  * Die get-Methode soll die View `resources/views/pages/index.html` als Template rendern (wie im vorangegangenen Beispiel).
+
+Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/04_implement_a_route_configuration
