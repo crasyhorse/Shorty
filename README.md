@@ -37,3 +37,5 @@ Für die Software "Shorty" muss ein neues Projekt angelegt werden.
 * Wo kommt der Ordner `node_modules` her? (siehe hierzu: https://docs.npmjs.com/cli/v6/configuring-npm/folders#node-modules)
 * Welche Bedeutung hat die Datei `.gitignore`? (siehe hierzu: https://www.freecodecamp.org/news/gitignore-what-is-it-and-how-to-add-to-repo/)
 * Warum zwei verschiedene Package Manager - Composer und NPM? (siehe hierzu: https://ttmm.io/tech/tale-of-two-package-managers/)
+
+Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/02_create_a_minimum_example
