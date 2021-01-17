@@ -1,42 +1,40 @@
-# Shorty - 01 Create a new project
-## Projekt anlegen
+# Shorty - 02 Create a minimum example
 
-Für die Software "Shorty" muss ein neues Projekt angelegt werden.
+Im dieser Lektion soll ein Minimalbeispiel erstellt werden, welches den Text "Hallo Welt" im Browser ausgibt. Hierfür ist folgendes notwendig:
 
-* Zum Anlegen des Projekts soll Composer benutzt werden (siehe hierzu: https://getcomposer.org/doc/03-cli.md#init)
-  * Projektname: `sysz25/shorty`
-  * Beschreibung: A small mapping tool for abbreviations and their meanings!
-  * Typ: project
-  * Lizenz: MIT
-  * Autor: John Doe (JohnDoe@anonymous.org)
-* Folgende Anforderungen muss die Software im Backend erfüllen:
-  * Die PHP-Version muss mindestens 7.4 betragen
-  * Als Grundlage für das Backend soll das "Fat Free Framework" (`bcosca/fatfree-core`), in einer Version `>= 3.7 und < 4.0`, eingesetzt werden. (siehe hierzu: https://getcomposer.org/doc/articles/versions.md)
-  * Die Source-Dateien sollen im Verzeichnis `app` abgelegt werden.
-  * Für das Verzeichnis `app/shorty` soll der PSR-4 namespace `Shorty` angelegt werden. (siehe hierzu: https://www.php-fig.org/psr/psr-4/ und  https://getcomposer.org/doc/04-schema.md#psr-4)
+* Anlegen des Verzeichnisses `resources/views/pages`
+* Anlegen der Datei `resources/views/pages/index.html` mit folgendem Inhalt:
 
-* Die Konfiguration der Client-Komponenten soll mit NPM durchgeführt werden (siehe hierzu: https://docs.npmjs.com/creating-a-package-json-file)
-  * Projektname: `shorty`
-  * Version: `1.0.0`
-  * Beschreibung: A small mapping tool for abbreviations and their meanings!
-  * Main: `resources/js/app.js`
-  * Autor: John Doe <johndoe@anonymous.org>
-  * Lizenz: MIT
-  * Keywords: `[]`
-  * Engines: `"npm": "~6.0.0"`
-  * Repository:
-    * Typ: `git`
-    * URL: `https://github.com/crasyhorse/Shorty.git`
+`index.html`
+```html
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+  <h1>Hallo Welt</h1>
+</body>
+</html>
+```
 
-* Die folgenden Anforderungen muss die Software im Frontend erfüllen:
-  * Das Frontend soll auf dem Javascript Framework "VueJs" aufbauen (vue ^2.6.12)
-  * Die notwendigen NPM-Pakete sollen installiert werden (siehe hierzu: https://docs.npmjs.com/cli/v6/commands/npm-install)
+* Anlegen der Datei `./index.php`. Diese soll folgendes Leisten:
+  * Anlegen der GET-Route `/` mit einem Closure (Funktion). Das Closure soll die Datei `resources/views/pages/index.html` als Template rendern und ausgeben.
+  * Siehe hierzu:
+    * https://fatfreeframework.com/3.7/getting-started#Hello,World:TheLess-Than-A-MinuteFat-FreeRecipe
+    * https://fatfreeframework.com/3.7/routing-engine
+    * https://fatfreeframework.com/3.7/views-and-templates
 
-## Weiterführende Informationen
+`index.php`
+```php
+<?php
 
-* Wo kommt der Ordner `node_modules` her? (siehe hierzu: https://docs.npmjs.com/cli/v6/configuring-npm/folders#node-modules)
-* Was hat es mit dem Ordner `vendor` auf sich? (siehe hierzu: https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies)
-* Welche Bedeutung hat die Datei `.gitignore`? (siehe hierzu: https://www.freecodecamp.org/news/gitignore-what-is-it-and-how-to-add-to-repo/)
-* Warum zwei verschiedene Package Manager - Composer und NPM? (siehe hierzu: https://ttmm.io/tech/tale-of-two-package-managers/)
+require_once('vendor/autoload.php');
 
-Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/02_create_a_minimum_example
+$f3 = Base::instance();
+
+$f3->route('GET /', function () {
+    echo Template::instance()->render('resources/views/pages/index.html');
+});
+
+$f3->run();
+```
+Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/02_create_the_abbreviation_controller_class
