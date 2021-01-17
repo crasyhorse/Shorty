@@ -1,15 +1,14 @@
-# 03 Create the AbbreviationController class
+# 04 Implement a route configuration
 
-In diesem Schritt soll eine REST-Api (https://de.wikipedia.org/wiki/Representational_State_Transfer) nach den Standards von Fat Free Framework implementiert werden. Hierfür wird eine Controller-Klasse erstellt, die für die Annahme sämtlicher Requests zuständig ist.
+Als nächstes sollen alle Routen/Mappings aus der Datei `index.php` in eine eigene Konfigurationsdatei ausgelagert werden. (https://fatfreeframework.com/3.7/framework-variables)
 
-* Anlegen des Controller-Klasse `AbbreviationController`
-  * Dateipfad: `app/shorty/Http/Controllers`
-  * Dateiname: `AbbreviationController.php`
-  * Der Controller ist mit dem korrekten Namespace zu versehen
-* Einrichten eines Route-mappings (Resource-Method-Representation)
-  * https://www.peej.co.uk/articles/rmr-architecture.html
-  * Das Mapping muss den `AbbreviationController` verwenden
-  * Route: `/`
+* Anlegen der Konfigurationsdatei
+  * Dateipfad: `./config`
+  * Dateiname: `config.ini`
+  * Anlegen der Mapping-Sektion
+  * Eintragen des Route-Mappings
+* Laden der Konfiguration in der Datei `index.php`
+* Bereinigen der Datei `index.php` (dort dürfen keine Routen mehr zu sehen sein.)
 
 `index.php`
 ```php
@@ -19,12 +18,9 @@ require_once('vendor/autoload.php');
 
 $f3 = Base::instance();
 $f3->set('AUTOLOAD', 'app/');
-
-$f3->map('/', 'Shorty\Http\Controllers\AbbreviationController');
+$f3->config('config/config.ini');
 
 $f3->run();
 ```
-* Erstellen der Methode `get()` im `AbbreviationController`
-  * Die get-Methode soll die View `resources/views/pages/index.html` als Template rendern (wie im vorangegangenen Beispiel).
 
-Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/04_implement_a_route_configuration
+Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/05_connect_to_a_database
