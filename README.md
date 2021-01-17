@@ -37,4 +37,4 @@ $f3->route('GET /', function () {
 
 $f3->run();
 ```
-Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/02_create_the_abbreviation_controller_class
+Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/03_create_the_abbreviation_controller_class
