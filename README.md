@@ -5,8 +5,9 @@ Hier soll nun die Verbindung zu einer Datenbank geschaffen werden. Zum Testen de
 * Anbinden der Datenbank
   * Dateipfad: `database`
   * Datenbankname: `shorty.SQLite`
-  * Eintragen der globalen Variablen `database_name` in die 
-     Konfigurationsdatei (kompletter Connect String)
+  * SQL-Skript: `database/shorty.sql`
+  * Siehe hierzu: https://sqliteonline.com/
+* Eintragen der globalen Variablen `database_name` in die  Konfigurationsdatei (kompletter Connect String)
   * Siehe hierzu: https://fatfreeframework.com/3.7/framework-variables
 * Erstellen der Klasse `BaseModel`
   * Dateipfad: `app/shorty/Models`
