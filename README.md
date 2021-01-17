@@ -1,14 +1,27 @@
-# 04 Implement a route configuration
+# Shorty - 02 Create a minimum example
 
-Als nächstes sollen alle Routen/Mappings aus der Datei `index.php` in eine eigene Konfigurationsdatei ausgelagert werden. (https://fatfreeframework.com/3.7/framework-variables)
+Im dieser Lektion soll ein Minimalbeispiel erstellt werden, welches den Text "Hallo Welt" im Browser ausgibt. Hierfür ist folgendes notwendig:
 
-* Anlegen der Konfigurationsdatei
-  * Dateipfad: `./config`
-  * Dateiname: `config.ini`
-  * Anlegen der Mapping-Sektion
-  * Eintragen des Route-Mappings
-* Laden der Konfiguration in der Datei `index.php`
-* Bereinigen der Datei `index.php` (dort dürfen keine Routen mehr zu sehen sein.)
+* Anlegen des Verzeichnisses `resources/views/pages`
+* Anlegen der Datei `resources/views/pages/index.html` mit folgendem Inhalt:
+
+`index.html`
+```html
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+  <h1>Hallo Welt</h1>
+</body>
+</html>
+```
+
+* Anlegen der Datei `./index.php`. Diese soll folgendes Leisten:
+  * Anlegen der GET-Route `/` mit einem Closure (Funktion). Das Closure soll die Datei `resources/views/pages/index.html` als Template rendern und ausgeben.
+  * Siehe hierzu:
+    * https://fatfreeframework.com/3.7/getting-started#Hello,World:TheLess-Than-A-MinuteFat-FreeRecipe
+    * https://fatfreeframework.com/3.7/routing-engine
+    * https://fatfreeframework.com/3.7/views-and-templates
 
 `index.php`
 ```php
@@ -17,10 +30,11 @@ Als nächstes sollen alle Routen/Mappings aus der Datei `index.php` in eine eige
 require_once('vendor/autoload.php');
 
 $f3 = Base::instance();
-$f3->set('AUTOLOAD', 'app/');
-$f3->config('config/config.ini');
+
+$f3->route('GET /', function () {
+    echo Template::instance()->render('resources/views/pages/index.html');
+});
 
 $f3->run();
 ```
-
-Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/05_connect_to_a_database
+Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/02_create_the_abbreviation_controller_class
