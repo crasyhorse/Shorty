@@ -35,4 +35,45 @@ final class AbbreviationTest extends TestCase
 
         $this->assertSame($expected, $actual);
     }
+
+    /**
+     * @test
+     * @group Modeltests
+    */
+    public function fill_fills_the_attributes_of_a_model_from_http_response_with_valid_attributes_only(): void
+    {
+        $f3 = Base::instance();
+        $f3->set('QUIET', true);
+        $f3->config('config/config.ini');
+
+        $valid_responses = [
+            ['id' => 7, 'short' => 'arccos', 'long' => 'arcus cosinus'],
+            ['id' => 8, 'long' => 'arcus cotangens', 'short' => 'arccot'],
+            ['short' => 'ARCH', 'id' => 9, 'long' => 'auto-regressive conditional heteroscedasticity'],
+        ];
+
+        $invalid_responses = [
+            ['id' => 10, 'short' => 'arcoth', 'long' => 'area cotangens hyperbolicus', 'extrafield' => 'nonsense'],
+        ];
+
+        $i = 0;
+        foreach ($valid_responses as $response) {
+            $abbreviation = new Abbreviation($response);
+            $this->assertEquals($response['id'], $abbreviation->id);
+            $this->assertEquals($response['short'], $abbreviation->short);
+            $this->assertEquals($response['long'], $abbreviation->long);
+            $i++;
+        }
+
+        $i = 0;
+        foreach ($invalid_responses as $response) {
+            $abbreviation = new Abbreviation($response);
+            $this->assertEquals(10, $abbreviation->id);
+            $this->assertEquals('arcoth', $abbreviation->short);
+            $this->assertEquals('area cotangens hyperbolicus', $abbreviation->long);
+            $this->assertObjectNotHasAttribute('extrafield', $abbreviation);
+            $i++;
+        }
+    }
+
 }
