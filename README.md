@@ -19,11 +19,11 @@ Durch das Integrieren von PHP-Unit in das Projekt soll die Codebasis sicherer un
   * directory: `.tests/Unit`
 * Anlegen des PSR-4 Namespaces `Tests` in der Datei `composer.json`
 * Einfügen der F3-Variablen `AUTOLOADER` in die Datei `config.ini`, so dass diese in der Software und in jedem Test verfügbar ist
-* Anlegen der Test-Klasse `ShortyTest` (https://phpunit.de/getting-started/phpunit-9.html)
+* Anlegen der Test-Klasse `AbbreviationTest` (https://phpunit.de/getting-started/phpunit-9.html)
   * Dateipfad: `tests/Unit/Models`
-  * Dateiname: `Shorty.php`
+  * Dateiname: `AbbreviationTest.php`
 * Anlegen eines Tests
   * Name: `all_returns_all_rows_from_a_table`
-  * Dieser Test muss beweisen, dass die Methode `Shorty->all()` alle Datensätze der Tabelle `shorty` zurückliefert.
+  * Dieser Test muss beweisen, dass die Methode `Abbreviation->all()` alle Datensätze der Tabelle `abbreviation` zurückliefert.
 
-Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/06_integrate_php_unit_tests
+Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/07_make_models_fillable
