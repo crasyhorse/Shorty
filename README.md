@@ -35,6 +35,7 @@ Für die Software "Shorty" muss ein neues Projekt angelegt werden.
 ## Weiterführende Informationen
 
 * Wo kommt der Ordner `node_modules` her? (siehe hierzu: https://docs.npmjs.com/cli/v6/configuring-npm/folders#node-modules)
+* Was hat es mit dem Ordner `vendor` auf sich? (siehe hierzu: https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies)
 * Welche Bedeutung hat die Datei `.gitignore`? (siehe hierzu: https://www.freecodecamp.org/news/gitignore-what-is-it-and-how-to-add-to-repo/)
 * Warum zwei verschiedene Package Manager - Composer und NPM? (siehe hierzu: https://ttmm.io/tech/tale-of-two-package-managers/)
 
