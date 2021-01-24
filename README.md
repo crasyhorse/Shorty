@@ -37,4 +37,6 @@ $f3->route('GET /', function () {
 
 $f3->run();
 ```
+* Um das Projekt anzeigen zu können, kann der PHP-eigene Webserver genutzt werden. Im Projektverzeichnis `php -S localhost:8080` eingeben.
+
 Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/03_create_the_abbreviation_controller_class
