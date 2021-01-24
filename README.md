@@ -1,29 +1,26 @@
-# 06 Integrating PHP-Unit tests
+# 07 Make models fillable
 
-Durch das Integrieren von PHP-Unit in das Projekt soll die Codebasis sicherer und qualitativ besser gemacht werden.
+Dieser Schritt beinhaltet das Hinzufügen einer Methode zu den Model-Klassen, um diese mit Werten aus einem Request befüllen zu können.
 
-* Installieren von PHP-Unit 9 mittels Composer
-  * PHP-Unit soll als dev-dependency installiert werden.
-* Erstellen der PHP-Unit-Konfiguration (https://phpunit.readthedocs.io/en/9.0/configuration.html)
-  * Anlegen der Datei `phpunit.xml` im Hauptverzeichnis
-  * Der Autoloader muss vor der Ausführung der Tests geladen werden
-  * Testergebnisse sollen farbig dargestellt werden
-  * Ereignisse der Typen `E_ERROR` und `E_USER_ERROR` sollen in Exceptions umgewandelt werden
-  * Ereignisse der Typen `E_STRICT`, `E_NOTICE`, und `E_USER_NOTICE` sollen in Exceptions umgewandelt werden
-  * Ereignisse der Typen `E_WARNING` und `E_USER_WARNING` sollen in Exceptions umgewandelt werden
-  * PHP-Unit soll beim ersten Auftreten eines Fehlers beendet werden
-  * Ausgabe der Testergebnisse im TestDox-Format
-* Anlegen einer Testsuite namens "Unit"
-  * Name: `Unit`
-  * suffix: `.php`
-  * directory: `.tests/Unit`
-* Anlegen des PSR-4 Namespaces `Tests` in der Datei `composer.json`
-* Einfügen der F3-Variablen `AUTOLOADER` in die Datei `config.ini`, so dass diese in der Software und in jedem Test verfügbar ist
-* Anlegen der Test-Klasse `AbbreviationTest` (https://phpunit.de/getting-started/phpunit-9.html)
-  * Dateipfad: `tests/Unit/Models`
-  * Dateiname: `AbbreviationTest.php`
+* Hinzufügen des Attributes `fillable` zum BaseModel
+  * Scope: `protected`
+  * Name: `fillable`
+  * Dieses Attribute legt fest, welche Attribute des Models direkt befüllt werden können.
+* Initialisieren des Attributes `fillable` im Constructor der Model-Klasse `Abbreviation( ['id', 'short', 'long'])`
+* Erweitern des Constructors der Model-Klasse `Abbreviation` um einen Parameter
+  * Typ: `array`
+  * Name: `$request`
+  * nullable
+* Implementieren der Methode `fill()` in der Model-Klasse `Abbreviation`. Diese Methode macht folgendes:
+  * Entgegennehmen aller Werte aus einem Request
+  * Vergleichen der Feldnamen im Request mit den Feldnamen im array `fillable` auf Übereinstimmung
+  * Übernehmen der Werte in das Model für alle Attribute die gleichermaßen im Request und im Array `fillable` vorhanden sind
+  * Request-Felder, deren Name nicht im Array `fillable` auftaucht, werden verworfen
+  * Die Methode `fill` wird im Constructor der Model-Klasse `Abbreviation` aufgerufen. Dies darf nur dann der Fall sein, wenn `$request` ungleich `NULL` ist.
+ ALTERNATIVE: Implementieren der Methode `fill()`, unter Ausnutzung des Template Method Pattern (siehe https://refactoring.guru/design-patterns/template-method/php/example)
 * Anlegen eines Tests
-  * Name: `all_returns_all_rows_from_a_table`
-  * Dieser Test muss beweisen, dass die Methode `Abbreviation->all()` alle Datensätze der Tabelle `abbreviation` zurückliefert.
+  * Testklasse: `Tests\Unit\Models\AbbreviationTest`
+  * Name: `fill_fills_the_attributes_of_a_model_from_http_response_with_valid_attributes_only`
+  * Dieser Test soll beweisen, dass die Methode `fill()` validate Attribute  verarbeitet, während sie ungültige Attribute verwirft.
 
-Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/07_make_models_fillable
+Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/08_test_refactoring
