@@ -1,33 +1,29 @@
-# 05 Connect to a database
+# 06 Integrating PHP-Unit tests
 
-Hier soll nun die Verbindung zu einer Datenbank geschaffen werden. Zum Testen der Anwendung wird in einem ersten Schritt eine SQLite-Datenbank benutzt.
+Durch das Integrieren von PHP-Unit in das Projekt soll die Codebasis sicherer und qualitativ besser gemacht werden.
 
-* Anbinden der Datenbank
-  * Dateipfad: `database`
-  * Datenbankname: `shorty.SQLite`
-  * Eintragen der globalen Variablen `database_name` in die 
-     Konfigurationsdatei (kompletter Connect String)
-  * Siehe hierzu: https://fatfreeframework.com/3.7/framework-variables
-* Erstellen der Klasse `BaseModel`
-  * Dateipfad: `app/shorty/Models`
-  * Dateiname: `BaseModel.php`
-  * Diese Klasse erbt von `DB\SQL\Mapper`
-  * Sie öffnet in ihrem Constructor die Verbindung zur Datenbank und
-     instanziiert den Mapper (`DB\SQL\Mapper`)
-  * Siehe hierzu: https://fatfreeframework.com/3.7/sql-mapper
-  * Der Name der Tabelle für das mapping wird mittels Parameter an 
-    den Constructor übergeben.
-* Erstellen der Model-Klasse `Abbreviation`
-  * Dateipfad: `app/shorty/Models`
-  * Dateiname: `Abbreviation.php`
-  * Dieses Model repräsentiert die Tabelle `abbreviations`
-  * Es erbt von `Shorty\Models\BaseModel`
-  * Der Constructor instanziiert die Tabelle `abbreviations`
-* Implementieren der Methode `BaseModel->all()`
-  * Diese Methode soll alle Datensätze einer Tabelle als Array
-     zurückgeben. D. h. der Aufruf `(new Shorty())->all()` liefert
-     alle Datensätze der Tabelle shorty.
-  * Hier ist bei Bedarf eine Lösung zu finden:
-     (https://stackoverflow.com/questions/35238544/using-fat-free-framework-fetch-from-table)
+* Installieren von PHP-Unit 9 mittels Composer
+  * PHP-Unit soll als dev-dependency installiert werden.
+* Erstellen der PHP-Unit-Konfiguration (https://phpunit.readthedocs.io/en/9.0/configuration.html)
+  * Anlegen der Datei `phpunit.xml` im Hauptverzeichnis
+  * Der Autoloader muss vor der Ausführung der Tests geladen werden
+  * Testergebnisse sollen farbig dargestellt werden
+  * Ereignisse der Typen `E_ERROR` und `E_USER_ERROR` sollen in Exceptions umgewandelt werden
+  * Ereignisse der Typen `E_STRICT`, `E_NOTICE`, und `E_USER_NOTICE` sollen in Exceptions umgewandelt werden
+  * Ereignisse der Typen `E_WARNING` und `E_USER_WARNING` sollen in Exceptions umgewandelt werden
+  * PHP-Unit soll beim ersten Auftreten eines Fehlers beendet werden
+  * Ausgabe der Testergebnisse im TestDox-Format
+* Anlegen einer Testsuite namens "Unit"
+  * Name: `Unit`
+  * suffix: `.php`
+  * directory: `.tests/Unit`
+* Anlegen des PSR-4 Namespaces `Tests` in der Datei `composer.json`
+* Einfügen der F3-Variablen `AUTOLOADER` in die Datei `config.ini`, so dass diese in der Software und in jedem Test verfügbar ist
+* Anlegen der Test-Klasse `ShortyTest` (https://phpunit.de/getting-started/phpunit-9.html)
+  * Dateipfad: `tests/Unit/Models`
+  * Dateiname: `Shorty.php`
+* Anlegen eines Tests
+  * Name: `all_returns_all_rows_from_a_table`
+  * Dieser Test muss beweisen, dass die Methode `Shorty->all()` alle Datensätze der Tabelle `shorty` zurückliefert.
 
 Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/06_integrate_php_unit_tests
