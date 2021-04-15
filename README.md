@@ -10,7 +10,7 @@ Für die Software "Shorty" muss ein neues Projekt angelegt werden.
   * Lizenz: MIT
   * Autor: John Doe (JohnDoe@anonymous.org)
 * Folgende Anforderungen muss die Software im Backend erfüllen:
-  * Die PHP-Version muss mindestens 7.4 betragen
+  * Die PHP-Version muss mindestens 7.4 betragen, dies ist im Ordner S:\30 Bereiche\21 InfoMgmt\Intern\80_Software\PHP
   * Als Grundlage für das Backend soll das "Fat Free Framework" (`bcosca/fatfree-core`), in einer Version `>= 3.7 und < 4.0`, eingesetzt werden. (siehe hierzu: https://getcomposer.org/doc/articles/versions.md)
   * Die Source-Dateien sollen im Verzeichnis `app` abgelegt werden.
   * Für das Verzeichnis `app/shorty` soll der PSR-4 namespace `Shorty` angelegt werden. (siehe hierzu: https://www.php-fig.org/psr/psr-4/ und  https://getcomposer.org/doc/04-schema.md#psr-4)
