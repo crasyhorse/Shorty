@@ -3,7 +3,7 @@
 Durch das Integrieren von PHP-Unit in das Projekt soll die Codebasis sicherer und qualitativ besser gemacht werden.
 
 * Installieren von PHP-Unit 9 mittels Composer
-  * PHP-Unit soll als dev-dependency installiert werden.
+  * PHP-Unit soll als dev-dependency installiert werden.(Erklärung für dev-dependency: https://bit.ly/3mLPpZF)
 * Erstellen der PHP-Unit-Konfiguration (https://phpunit.readthedocs.io/en/9.0/configuration.html)
   * Anlegen der Datei `phpunit.xml` im Hauptverzeichnis
   * Der Autoloader muss vor der Ausführung der Tests geladen werden
