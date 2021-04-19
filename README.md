@@ -22,4 +22,4 @@
   * Im setup-Fixture sollen die vorbereitenden Tätigkeiten durchgeführt werden, die bisher in jedem einzelnen Tests durchgeführt wurden.
 
 
-Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/09-enable_abbreviationcontroller_to_receive_objects
+Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/09_enable_abbreviationcontroller_to_receive_objects
