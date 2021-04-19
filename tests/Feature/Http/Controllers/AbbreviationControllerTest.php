@@ -6,6 +6,7 @@ namespace Tests\Feature\Http\Controllers;
 
 use Base;
 use Exception;
+use PDOException;
 use PHPUnit\Framework\TestCase;
 use Shorty\Models\Abbreviation;
 
@@ -84,5 +85,17 @@ final class AbbreviationControllerTest extends TestCase
         $this->expectExceptionCode(404);
 
         $this->f3->mock('PATCH /abbreviation/666', ['id' => 666, 'short' => 'usw', 'long' => 'und so weiter']);
+    }
+
+    /**
+     * @test
+     * @group AbbreviationControllerTest
+     */
+    public function post_must_react_to_unique_key_violation_when_adding_an_already_existing_abbreviation(): void
+    {
+        $this->expectException(PDOException::class);
+        ob_end_clean();
+
+        $this->f3->mock('POST /abbreviation', ['id' => 666, 'short' => 'AC',  'long' => 'axiom of choice']);
     }
 }
