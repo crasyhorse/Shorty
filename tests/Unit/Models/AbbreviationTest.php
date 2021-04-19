@@ -5,16 +5,19 @@ declare(strict_types=1);
 namespace Tests\Unit\Models;
 
 use Base;
+use PDOException;
 use PHPUnit\Framework\TestCase;
 use Shorty\Models\Abbreviation;
 
 final class AbbreviationTest extends TestCase
 {
+    private $f3;
+
     protected function setup(): void
     {
-        $f3 = Base::instance();
-        $f3->set('QUIET', true);
-        $f3->config('config/config.ini');
+        $this->f3 = Base::instance();
+        $this->f3->set('QUIET', true);
+        $this->f3->config('config/config.ini');
     }
 
     /**
@@ -78,5 +81,75 @@ final class AbbreviationTest extends TestCase
         $this->assertEquals('arcoth', $abbreviation->short);
         $this->assertEquals('area cotangens hyperbolicus', $abbreviation->long);
         $this->assertObjectNotHasAttribute('extrafield', $abbreviation);
+    }
+
+    /**
+     * @test
+     * @group Modeltests
+     */
+    public function findIt_returns_an_abbreviation_based_on_a_given_id(): void
+    {
+        $abbreviation = new Abbreviation();
+        $expected = $abbreviation->load(
+            ['id = :id', ':id' => 3]
+        );
+        $actual = $abbreviation->findIt(3);
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    /**
+     * @test
+     * @group Modeltests
+     */
+    public function findIt_returns_null_if_a_given_id_does_not_exist(): void
+    {
+        $abbreviation = new Abbreviation();
+        $actual = $abbreviation->findIt(666);
+
+        $this->assertNull($actual);
+    }
+
+    /**
+     * @test
+     * @group Modeltests
+     */
+    public function updateIt_modifies_values_of_an_existing_abbreviation(): void
+    {
+        $request = ['id' => 3, 'short' => 'AC', 'long' => 'Axiom of Choice'];
+
+        $expected = new Abbreviation($request);
+        $actual = (new Abbreviation())->findIt(3);
+        $actual->updateIt($request);
+
+        $this->assertEquals($expected->id, $actual->id);
+        $this->assertEquals($expected->short, $actual->short);
+        $this->assertEquals($expected->long, $actual->long);
+
+        /* Clean up */
+        $actual->id = 3;
+        $actual->short = 'AC';
+        $actual->long = 'axiom of choice';
+        $actual->save();
+    }
+
+    /**
+     * @test
+     * @group Modeltests
+     */
+    public function updateIt_throws_an_exception_if_a_given_id_does_not_exist_in_the_database(): void
+    {
+        $this->expectException(PDOException::class);
+
+        $request = ['id' => 10, 'short' => 'arcoth', 'long' => 'Area Cotangens Hyperbolicus'];
+
+        $actual = new Abbreviation(['id' => 10, 'short' => 'arcoth', 'long' => 'area cotangens hyperbolicus']);
+        $actual->updateIt($request);
+        ob_end_clean();
+
+        /* Clean up */
+        $actual->erase(
+            ['id = :id', ':id' => 10]
+        );
     }
 }
