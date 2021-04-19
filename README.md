@@ -1,63 +1,77 @@
-# Erstellen der Vue-Instanz
+# Erstellen einer ersten Vue-Komponente
 
-In diesem Schritt wird die Vue-Instanz erzeugt und an ein Template gebunden.
-
-* Anpassen des Templates (hinzufügen der einzelnen Elemente)
-  * Template: `resources/views/pages/index.html`
-
-`index.html`
-```html
-<!doctype html>
-<html lang="de">
-```
-
-siehe hierzu: 
-  https://developer.mozilla.org/en-US/docs/Glossary/Doctype
-  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html
-
-`index.html`
-```html
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-```
-
-siehe hierzu:
-  https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
-  https://www.mediaevent.de/meta/
-
-`index.html`
-```html
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
-```
-
-* Prüfen, ob das npm-Paket `vue` bereits installiert ist (sollte so sein).
-* Importieren von Vuejs in die Applikation
-* Erstellen der Vue-Instanz
+* Einbinden von Twitter Bootstrap als CDN (nur CSS, kein Java Script) (siehe https://getbootstrap.com/docs/4.1/getting-started/introduction/)
+* Erstellen einer Toolbar-Komponente
+  * Name: `sz-navbar`
+  * Template:
 
 `app.js`
+```html
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" 
+           href="#"
+        >
+           <img src="resources/img/Wappen_SZ25_web_klein.PNG">
+           <span>Sysz25 - Shorty</span>
+        </a>
+        <button 
+            class="navbar-toggler" 
+            type="button" 
+            aria-controls="navbarSupportedContent" 
+            aria-expanded="false" 
+            aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+```
+
+siehe hierfür:
+
+https://vuejs.org/v2/guide/components.html
+https://vuejs.org/v2/guide/components-registration.html
+
+* Einbinden der Komponente `sz-navbar` in das Template (das Styling der Komponente ist zu diesem Zeitpunkt noch nicht wichtig. Dies wird in einem späteren Ticket behandelt.)
+
+# Hinweis
+
+Die folgenden Fragen sollten nach Bearbeitung dieses Tickets beantwortet werden können:
+
+* Was ist eine Vue-Komponente?
+* Warum muss `data` eine Funktion sein?
+* Was ist bei der Namensgebung für Komponenten zu beachten?
+* Worin besteht der Unterschied zwischen den beiden folgenden Beispielen A und B?
+
+Beispiel A:
 ```javascript
-new Vue({
+Vue.component('sz-navbar', {/* ... */});
+
+const vm = new Vue({
     el: '#app'
 });
 ```
 
-siehe hierzu: https://vuejs.org/v2/guide/instance.html#Creating-a-Vue-Instance
+Beispiel B:
+```javascript
+const szNavbar = {/* ... */};
 
-* Einbinden der Vue-Instanz in das Template
-  * Template: `resources/views/pages/index.html`
-
-`index.html`
-```html
-<body>
-    <div id="app"></div>
-</body>
+const vm = new Vue({
+    el: '#app',
+    components: {
+        sz-navbar: szNavbar
+    }
+});
 ```
 
-Wie wird der Zusammenhang zwischen der Vue-Instanz und dem Template hergestellt?
+* Was ist am folgenden Beispiel falsch?
 
-siehe hierzu: https://vuejs.org/v2/guide/index.html
+```javascript
+const vm = new Vue({
+    el: '#app'
+});
 
+Vue.component('sz-navbar', {/* ... */});
+```
 
 
 
