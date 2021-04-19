@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Shorty\Http\Controllers;
 
 use Base;
-use Exception;
 use PDOException;
 use Shorty\Models\Abbreviation;
 use Template;
@@ -39,17 +38,14 @@ class AbbreviationController
     public function patch(): void
     {
         parse_str($this->f3->get('BODY'), $request);
-        $id = $this->f3->get('PARAMS.id');
-        $abbreviation = (new Abbreviation())->load(
-            ['id = :id', ':id' => $id]
-        );
+        $id = (int) $this->f3->get('PARAMS.id');
 
-        if (!$abbreviation) {
-            throw new Exception();
+        $abbreviation = (new Abbreviation())->findIt($id);
+
+        if (empty($abbreviation)) {
+            throw new PDOException();
         }
 
-        $abbreviation->short = $request['short'];
-        $abbreviation->long = $request['long'];
-        $abbreviation->save();
+        $abbreviation->updateIt($request);
     }
 }
