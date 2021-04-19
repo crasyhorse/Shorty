@@ -1,29 +1,22 @@
-# 06 Integrating PHP-Unit tests
+# Durchführen eines Refactorings an einem Test
 
-Durch das Integrieren von PHP-Unit in das Projekt soll die Codebasis sicherer und qualitativ besser gemacht werden.
-
-* Installieren von PHP-Unit 9 mittels Composer
-  * PHP-Unit soll als dev-dependency installiert werden.(Erklärung für dev-dependency: https://bit.ly/3mLPpZF)
-* Erstellen der PHP-Unit-Konfiguration (https://phpunit.readthedocs.io/en/9.0/configuration.html)
-  * Anlegen der Datei `phpunit.xml` im Hauptverzeichnis
-  * Der Autoloader muss vor der Ausführung der Tests geladen werden
-  * Testergebnisse sollen farbig dargestellt werden
-  * Ereignisse der Typen `E_ERROR` und `E_USER_ERROR` sollen in Exceptions umgewandelt werden
-  * Ereignisse der Typen `E_STRICT`, `E_NOTICE`, und `E_USER_NOTICE` sollen in Exceptions umgewandelt werden
-  * Ereignisse der Typen `E_WARNING` und `E_USER_WARNING` sollen in Exceptions umgewandelt werden
-  * PHP-Unit soll beim ersten Auftreten eines Fehlers beendet werden
-  * Ausgabe der Testergebnisse im TestDox-Format
-* Anlegen einer Testsuite namens "Unit"
-  * Name: `Unit`
-  * suffix: `.php`
-  * directory: `.tests/Unit`
-* Anlegen des PSR-4 Namespaces `Tests` in der Datei `composer.json`
-* Einfügen der F3-Variablen `AUTOLOADER` in die Datei `config.ini`, so dass diese in der Software und in jedem Test verfügbar ist
-* Anlegen der Test-Klasse `AbbreviationTest` (https://phpunit.de/getting-started/phpunit-9.html)
-  * Dateipfad: `tests/Unit/Models`
-  * Dateiname: `AbbreviationTest.php`
-* Anlegen eines Tests
-  * Name: `all_returns_all_rows_from_a_table`
-  * Dieser Test muss beweisen, dass die Methode `Abbreviation->all()` alle Datensätze der Tabelle `abbreviation` zurückliefert.
-
-Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/07_make_models_fillable
+* Implementieren eines neuen Tests aus dem bestehenden Test `fill_fills_the_attributes_of_a_model_from_http_response_with_valid_attributes_only`
+  * Test-Klasse: `tests\Unit\Models\ShortyTest`
+  * Testname: `fill_fills_the_attributes_of_a_model_from_http_response_with_valid_attributes`
+  * Dieser Test soll beweisen, dass die Methode fill validate Attribute verarbeitet.
+* Implementieren eines weiteren Tests
+  * Testname: `fill_does_not_use_invalid_attributes_to_fill_a_model`
+  * Dieser Test muss den Beweis erbringen, dass die Methode fill, ungültige Attribute beim Befüllen eines Models ignoriert.
+* Implementierung eines Data providers für validate Eingabewerte
+  * Test-Klasse: `tests\Unit\Models\ShortyTest`
+  * Providername: `valid_request_values`
+  * Dieser Data provider muss valide Eingabewerten liefern
+  * Verknüpfter Test: `fill_fills_the_attributes_of_a_model_from_http_response_with_valid_values`
+  * siehe https://phpunit.readthedocs.io/en/9.0/writing-tests-for-phpunit.html#data-providers
+* Implementieren eines Data providers für invalide Eingabewerte
+  * Test-Klasse: `tests\Unit\Models\ShortyTest`
+  * Providername: `invalid_request_values`
+  * Dieser Data provider muss ungültige Eingabewerten liefern
+  * Verknüpfter Test: `fill_does_not_fills_the_attributes_of_a_model_from_http_response_with_invalid_values`
+* Erstellen eines Setup-Fixtures (siehe https://phpunit.readthedocs.io/en/9.0/fixtures.html)
+  * Im setup-Fixture sollen die vorbereitenden Tätigkeiten durchgeführt werden, die bisher in jedem einzelnen Tests durchgeführt wurden.
