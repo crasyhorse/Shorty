@@ -75,4 +75,4 @@ Vue.component('sz-navbar', {/* ... */});
 
 
 
-Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/14_Create_the_first_component
+Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/15_Implementing_the_search_field
