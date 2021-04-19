@@ -24,9 +24,11 @@ class Abbreviation extends BaseModel
 
     protected function fillAttributes(array $values): void
     {
+        $id = $this->id;
         foreach ($this->fillable as $attribute) {
             $this->{$attribute} = $values[$attribute];
         }
+        $this->id = empty($id) ? $this->id : $id;
     }
 
     final public function findIt(int $id): ?self
