@@ -20,3 +20,6 @@
   * Verknüpfter Test: `fill_does_not_fills_the_attributes_of_a_model_from_http_response_with_invalid_values`
 * Erstellen eines Setup-Fixtures (siehe https://phpunit.readthedocs.io/en/9.0/fixtures.html)
   * Im setup-Fixture sollen die vorbereitenden Tätigkeiten durchgeführt werden, die bisher in jedem einzelnen Tests durchgeführt wurden.
+
+
+Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/09-enable_abbreviationcontroller_to_receive_objects
