@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace Shorty\Models;
 
+use PDOException;
+use Throwable;
+
 class Abbreviation extends BaseModel
 {
-    private $table_name = 'abbreviations';
+    private $table_name = 'abbreviation';
 
     public function __construct(array $request = null)
     {
@@ -24,5 +27,26 @@ class Abbreviation extends BaseModel
         foreach ($this->fillable as $attribute) {
             $this->{$attribute} = $values[$attribute];
         }
+    }
+
+    final public function findIt(int $id): ?self
+    {
+        try {
+            return $this->load(
+                ['id = :id', ':id' => $id]
+            );
+        } catch (Throwable $t) {
+            return null;
+        }
+    }
+
+    final public function updateIt(array $attributes): void
+    {
+        if ($this->dry() === true) {
+            throw new PDOException();
+        }
+
+        $this->fill($attributes);
+        $this->save();
     }
 }
