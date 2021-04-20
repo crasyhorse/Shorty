@@ -17,4 +17,4 @@
 
 
 
-Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/10-feature_testing_abbreviationcontroller
+Hier geht's weiter: https://github.com/crasyhorse/Shorty/tree/10_feature_testing_abbreviationcontroller
